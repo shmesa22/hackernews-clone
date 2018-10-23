@@ -1,7 +1,7 @@
 import { applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import { createLogger } from 'redux-logger';
-import DevTools from 'store/DevTools';
+import DevTools from './DevTools';
 
 const isProd = process.env.NODE_ENV === 'production';
 const middlewareList = [];

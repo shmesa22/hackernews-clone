@@ -1,4 +1,4 @@
-import { actionTypes } from 'store/app/actions';
+import { actionTypes } from './actions';
 
 const getInitialState = () => ({
   theme: 'dark'

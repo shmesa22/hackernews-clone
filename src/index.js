@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
+import { ThemeProvider } from 'styled-components';
 import configureStore from 'store';
 import App from 'components/App';
+import GlobalStyles from 'styles/global';
+import { colorsDark } from 'styles/palette';
 import * as serviceWorker from 'serviceWorker';
 
 const initialState = {};
@@ -12,7 +15,12 @@ store.dispatch({ type: '@@INIT' });
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <ThemeProvider theme={colorsDark}>
+      <Fragment>
+        <App />
+        <GlobalStyles />
+      </Fragment>
+    </ThemeProvider>
   </Provider>,
   document.getElementById('root')
 );
