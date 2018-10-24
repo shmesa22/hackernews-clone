@@ -1,18 +1,22 @@
-import React, { Component, Fragment } from 'react';
-import List from 'components/List';
-import { Wrapper, Title } from './styles';
+import { connect } from 'react-redux';
+import actions from 'store/story/actions';
+import App from './App';
+import { hasMoreStoriesSelector } from 'store/story/selectors';
 
-class App extends Component {
-  render() {
-    return (
-      <Fragment>
-        <Wrapper>
-          <Title>Hacker News Reader</Title>
-          <List />
-        </Wrapper>
-      </Fragment>
-    );
-  }
-}
+const mapStateToProps = state => ({
+  hasMoreStories: hasMoreStoriesSelector(state),
+  stories: state.story.stories,
+  page: state.story.page,
+  storyIds: state.story.storyIds,
+  isFetching: state.story.isFetching,
+});
 
-export default App;
+const mapDispatchToProps = dispatch => ({
+  fetchStories: ({ storyIds, page }) => dispatch(actions.fetchStories({ storyIds, page })),
+  fetchStoriesFirstPage: () => dispatch(actions.fetchStoryIds()),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(App);
